@@ -60,11 +60,7 @@ Lat
 });
 app.post("/posts", async (req, res) => {
   const { lng, lat } = req.body;
-  await pool.query("Insert into posts(loc)values($1)", [
-    lat,
-    lng,
-    `(${lng},${lat})`,
-  ]);
+  await pool.query("Insert into posts(loc)values($1)", [`(${lng},${lat})`]);
   res.redirect("/posts");
 });
 app.listen(3005, () => {
