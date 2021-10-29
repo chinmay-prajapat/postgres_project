@@ -28,8 +28,8 @@ ${rows
     return `
     <tr>
     <td>${row.id}</td>
-    <td>${row.lng}</td>
-    <td>${row.lat}</td>
+    <td>${row.loc.x}</td>
+    <td>${row.loc.y}</td>
 
     
     </tr>
@@ -60,7 +60,7 @@ Lat
 });
 app.post("/posts", async (req, res) => {
   const { lng, lat } = req.body;
-  await pool.query("Insert into posts(lat,lng,loc)values($1,$2,$3)", [
+  await pool.query("Insert into posts(loc)values($1)", [
     lat,
     lng,
     `(${lng},${lat})`,
